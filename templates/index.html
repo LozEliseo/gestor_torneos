@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h1>Listado de Torneos Creados</h1>
+    
+    {% if torneos %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Formato</th>
+                    <th scope="col">Equipos</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for torneo in torneos %}
+                <tr>
+                    <th scope="row">{{ torneo.id }}</th>
+                    <td>{{ torneo.nombre }}</td>
+                    <td>{{ torneo.formato }}</td>
+                    <td>{{ torneo.num_equipos }}</td>
+                    <td>
+                        {% if torneo.campeon %}
+                            <span class="badge bg-success">Finalizado (Campeón: {{ torneo.campeon }})</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Activo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('dashboard', torneo_id=torneo.id) }}" class="btn btn-sm btn-info text-white">Gestionar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Aún no hay torneos registrados. ¡Crea uno para empezar!
+        </div>
+    {% endif %}
+{% endblock %}

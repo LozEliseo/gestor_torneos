@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Torneo{% endblock %}
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Crear Nuevo Torneo</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('crear_torneo') }}">
+                
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre del Torneo:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="num_equipos" class="form-label">Número de Equipos:</label>
+                    <input type="number" class="form-control" id="num_equipos" name="num_equipos" min="2" required>
+                    <div class="form-text">
+                        Debe ser una potencia de 2 (2, 4, 8, 16, etc.) para eliminación directa.
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="formato" class="form-label">Formato:</label>
+                    <input type="text" class="form-control" id="formato" name="formato" value="Eliminación Directa Simple" readonly>
+                    <div class="form-text">
+                        Este formato está fijo en la versión inicial.
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success mt-3">Crear Torneo</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
